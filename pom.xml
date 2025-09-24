@@ -12,7 +12,7 @@
 	<artifactId>todo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>todo</name>
-	<description>Todo app - Spring Boot API</description>
+	<description>Todo App Spring Boot API</description>
 	<url/>
 	<licenses>
 		<license/>
