@@ -1,0 +1,13 @@
+# Build the app
+FROM maven:3-openjdk-17-slim AS builder
+WORKDIR /app 
+COPY . .
+RUN ./mvnw clean package -DskipTests
+
+# Cretae the final image
+FROM openjdk:17-jre-slim
+WORKDIR /app
+
+# COPY the built jar from the builder stage
+COPY --from=builder /app/target/*.jar app.jar
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
