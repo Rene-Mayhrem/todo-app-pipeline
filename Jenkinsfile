@@ -24,8 +24,12 @@ pipeline {
 
         stage('Push todo-app to DockerHub') {
             steps{
-                echo('Pushing the docker image to DockerHub...')
-                sh('docker push mayhrem/todo-app:latest')
+                script {
+                    withCredentials([usernamePassword(credentials: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USERNAME', passwordCredentials: 'DOCKERHUB_PASSWORD')]){
+                        sh('docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}')
+                        sh('docker push mayhrem/todo-app:latest')
+                    }
+                }
             }
         }
     }
